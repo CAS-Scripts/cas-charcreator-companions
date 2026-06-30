@@ -1,0 +1,49 @@
+CAS Character Creator (cas-charcreator) v1.0.0  -  ESCROW BUILD
+
+About this build
+   cas-charcreator in this package is prepared for Cfx.re Asset Escrow. Upload ONLY the
+   cas-charcreator folder to your Cfx.re Keymaster / portal to protect it: the code is
+   encrypted on Cfx.re's side, while config.lua and the locales/ files stay readable and
+   editable (declared via escrow_ignore in the manifest). The two companion resources below
+   (vorp_character and the rsg-appearance stub) are plain open source and are not escrowed.
+
+This package contains the main resource and two companion resources.
+
+1. cas-charcreator
+   The main resource. Required on BOTH VORP and RSGCore. It auto-detects the framework and
+   adapts. Server owners edit config.lua and locales/ only.
+
+2. vorp_character        (VORP only)
+   Compatibility shim that proxies legacy exports.vorp_character calls to cas-charcreator
+   (used by vorp_inventory and other clothing scripts). Use it ONLY on VORP, and make sure
+   it is the only resource named vorp_character (keep the stock one from loading).
+
+3. rsg-appearance        (RSGCore only) STUB
+   cas owns the appearance AND wardrobe stack on RSG. The stock rsg-appearance, run alongside
+   cas, corrupts the player ped. REPLACE your stock rsg-appearance folder with this stub. The
+   stub keeps the rsg-appearance name, ROUTES the read-only exports rsg-hud and rsg-essentials
+   call straight to cas (so the HUD hides while a cas menu is open, and the bandana restores
+   the correct look), and it also PROVIDES the rsg-wardrobe name (rsg-bathing hard-depends on
+   both rsg-appearance and rsg-wardrobe).
+
+RSGCore: also DELETE the stock rsg-wardrobe folder
+   cas provides the wardrobe and outfits itself, and the rsg-appearance stub provides the
+   rsg-wardrobe name. So on RSG, DELETE your stock rsg-wardrobe folder entirely. Do NOT just
+   stop it: if the folder is still present, FXServer loads it and bypasses the stub's provide.
+
+Which resources go where
+   VORP servers:    cas-charcreator + vorp_character.
+   RSGCore servers: cas-charcreator + the rsg-appearance stub (replace your stock folder), and
+                    DELETE your stock rsg-wardrobe folder. Do not use vorp_character.
+
+Setup
+   Drop the resources in, then follow the exact server.cfg lines and load order in:
+   cas-charcreator/docs/installation.md
+
+Documentation
+   cas-charcreator/docs/installation.md
+   cas-charcreator/docs/configuration.md
+   cas-charcreator/docs/troubleshooting.md
+
+Purchase, support, and updates
+   https://codeaftersex.com/script/character-creator?v=escrow
